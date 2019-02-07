@@ -1,28 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: 0
+    };
+    this.setNewNumber = this.setNewNumber.bind(this);
+  }
+  setNewNumber() {
+    this.setState({ data: this.state.data + 1 });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div id="counter">{this.state.data}</div>
+        <button onClick={this.setNewNumber}>Increment</button>
+
+        <Content myNumber>{this.state.myNumber}></Content>
       </div>
     );
   }
 }
 
+class Content extends React.Component {
+  componentWillMount() {
+    console.log("component will mount");
+  }
+  componentDidMount() {
+    console.log("component did mount");
+  }
+  componentWillReceiveProps(newProps) {
+    console.log("Component will recieve props");
+  }
+  shouldComponentUpdate(newProps, newState) {
+    return true;
+  }
+  componentWillUpdate(newProps, newState) {
+    console.log("Comp will update");
+  }
+  componentDidUpdate(newProps, newState) {
+    console.log("Comp did update");
+  }
+  componentWillUnmount() {
+    console.log("Compon will unmount");
+  }
+  render() {
+    return (
+      <div>
+        <h3>{this.props.myNumber}</h3>
+      </div>
+    );
+  }
+}
 export default App;
